@@ -10,8 +10,8 @@ body {
 }
 
 model-viewer {
-  width: 800px;
-  height: 600px;
+  width: 50%;
+  height: 45%;
   background-color: #ffffff;
 }
 
