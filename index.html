@@ -12,15 +12,54 @@
   <body>
     <!-- <model-viewer> HTML element -->
     <model-viewer bounds="tight" enable-pan src="chandon_compressed.glb" ar ar-modes="scene-viewer webxr quick-look" camera-controls environment-image="neutral" auto-rotate poster="poster.webp" shadow-intensity="1">
+	  <button class="view-button" slot="hotspot-0" data-position="-0.0569m 0.0969m -0.1398m" data-normal="-0.5829775m 0.2863482m -0.7603565m" data-orbit="-50.94862deg 84.56856deg 0.06545582m" data-target="-0.04384604m 0.07348397m -0.1213202m">
+		The Fighters
+	  </button>
       <div class="progress-bar hide" slot="progress-bar">
           <div class="update-bar"></div>
       </div>
       <button slot="ar-button" id="ar-button">
           View in AR
       </button>
+	  
     </model-viewer>  
     <script src="script.js"></script>
     <!-- Loads <model-viewer> for browsers: -->
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+	
+	<script type="module">
+	  const modelViewer1 = document.querySelector("#hotspot-camera-view-demo");
+	  const annotationClicked = (annotation) => {
+		let dataset = annotation.dataset;
+		modelViewer1.cameraTarget = dataset.target;
+		modelViewer1.cameraOrbit = dataset.orbit;
+		modelViewer1.fieldOfView = '45deg';
+	  }
+
+	  modelViewer1.querySelectorAll('button').forEach((hotspot) => {
+		console.log("hello hotspot", hotspot);
+		hotspot.addEventListener('click', () => annotationClicked(hotspot));
+	  });
+	</script>
+	
+	<style type="text/css">
+	  .view-button {
+		  background: #fff;
+		  border-radius: 4px;
+		  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+		  color: rgba(0, 0, 0, 0.8);
+		  display: block;
+		  font-family: Futura, Helvetica Neue, sans-serif;
+		  font-size: 12px;
+		  font-weight: 700;
+		  max-width: 128px;
+		  overflow-wrap: break-word;
+		  padding: 0.5em 1em;
+		  position: absolute;
+		  width: max-content;
+		  height: max-content;
+		  transform: translate3d(-50%, -50%, 0);
+		}
+	</style>
   </body>
 </html>
